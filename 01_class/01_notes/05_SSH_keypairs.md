@@ -163,4 +163,164 @@ You have a **cloud server** hosting a website. Instead of using an **insecure pa
 
 
 
----restart from 1:35:00
+---
+---
+---
+
+
+
+
+## An example of ssh keypairs Vulnerability:
+
+
+If your friend (or anyone) gains access to your machine even once, they could **silently add their public key** to your `~/.ssh/authorized_keys` file. This would allow them to connect **without your permission** at any time in the future.
+
+### **How This Works (Attack Scenario)**
+1. Your friend accesses your machine (physically or remotely).
+2. They add their public key to `~/.ssh/authorized_keys` like this:
+   ```bash
+   echo "ssh-rsa AAAAB3...your_friend's_public_key..." >> ~/.ssh/authorized_keys
+   ```
+3. Now, from their machine, they can log into your machine **without a password** using:
+   ```bash
+   ssh your-username@your-machine-ip
+   ```
+4. You won’t get any notification unless you monitor SSH logs.
+
+---
+
+### **How to Protect Against This?**
+✅ **1. Regularly Check Your `authorized_keys` File**  
+   Run:
+   ```bash
+   cat ~/.ssh/authorized_keys
+   ```
+   - If you see an unknown key, **remove it**:
+     ```bash
+     nano ~/.ssh/authorized_keys
+     ```
+     or
+     ```bash
+     sed -i '/unwanted-public-key/d' ~/.ssh/authorized_keys
+     ```
+
+✅ **2. Restrict File Permissions**
+   Prevent unauthorized edits by setting strict permissions:
+   ```bash
+   chmod 600 ~/.ssh/authorized_keys
+   chown $USER:$USER ~/.ssh/authorized_keys
+   ```
+
+✅ **3. Enable SSH Key Logging**
+   Edit `/etc/ssh/sshd_config` and enable logging:
+   ```bash
+   LogLevel VERBOSE
+   ```
+   Then restart SSH:
+   ```bash
+   sudo systemctl restart ssh
+   ```
+   Now, every login attempt will be logged in `/var/log/auth.log`.
+
+✅ **4. Use `sudo` Restrictions**
+   - If your friend has `sudo` access, they can do anything.  
+   - Run `sudo visudo` and limit their privileges.
+
+✅ **5. Disable SSH When Not Needed**
+   If you rarely use SSH, disable it:
+   ```bash
+   sudo systemctl disable --now ssh
+   ```
+
+Would you like help setting up **alerts** for unauthorized SSH access? 🚀
+
+You can set up alerts for unauthorized SSH access using **fail2ban**, **auditd**, or **custom scripts** that send notifications when someone logs in via SSH. Here’s how:
+
+---
+
+## **1. Enable Email Alerts for SSH Logins**
+This script will **send an email notification** whenever someone logs into your machine via SSH.
+
+### **🔹 Step 1: Install `mailutils` (for sending emails)**
+Run:
+```bash
+sudo apt update && sudo apt install mailutils -y
+```
+
+### **🔹 Step 2: Create a Script to Send Alerts**
+Run:
+```bash
+sudo nano /etc/profile.d/ssh-login-alert.sh
+```
+Paste this:
+```bash
+#!/bin/bash
+IP=$(who | awk '{print $5}' | tr -d '()' | head -1)
+USER=$(whoami)
+DATE=$(date +"%Y-%m-%d %H:%M:%S")
+HOSTNAME=$(hostname)
+
+# Email details
+TO="your-email@example.com"
+SUBJECT="SSH Login Alert - $HOSTNAME"
+MESSAGE="SSH login detected!\n\nUser: $USER\nIP: $IP\nTime: $DATE\nMachine: $HOSTNAME"
+
+echo -e "$MESSAGE" | mail -s "$SUBJECT" "$TO"
+```
+**Save and exit** (`CTRL + X`, then `Y`, then `ENTER`).
+
+### **🔹 Step 3: Make It Executable**
+```bash
+sudo chmod +x /etc/profile.d/ssh-login-alert.sh
+```
+
+Now, every time someone logs in via SSH, you’ll **receive an email alert**! 📩
+
+---
+
+## **2. Monitor Unauthorized SSH Key Additions**
+To detect if someone adds their SSH key to your `~/.ssh/authorized_keys` file:
+
+### **🔹 Step 1: Set Up a File Watcher**
+Run:
+```bash
+sudo apt install inotify-tools -y
+```
+
+Then, create a monitoring script:
+```bash
+nano ~/monitor_ssh_keys.sh
+```
+Paste this:
+```bash
+#!/bin/bash
+FILE="$HOME/.ssh/authorized_keys"
+LOG="/var/log/ssh-key-monitor.log"
+
+inotifywait -m -e modify "$FILE" |
+while read path action file; do
+    echo "$(date): SSH key file modified!" >> "$LOG"
+    echo "ALERT! Someone modified your SSH keys!" | mail -s "SSH Key Alert!" your-email@example.com
+done
+```
+**Save and exit**, then make it executable:
+```bash
+chmod +x ~/monitor_ssh_keys.sh
+```
+
+### **🔹 Step 2: Run It in the Background**
+Start monitoring:
+```bash
+nohup ~/monitor_ssh_keys.sh &
+```
+
+Now, if someone **adds or removes SSH keys**, you’ll **get an email alert** immediately. 🚨
+
+---
+
+## **3. Check SSH Logs for Unauthorized Logins**
+To manually check SSH logins:
+```bash
+sudo cat /var/log/auth.log | grep "Accepted"
+```
+This will show all successful SSH logins.
