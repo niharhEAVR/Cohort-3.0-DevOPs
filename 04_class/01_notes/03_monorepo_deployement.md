@@ -8,7 +8,7 @@
 2. **Install Required Software** on Both Instances  
    - Update system packages:  
      ```sh
-     sudo apt update && sudo apt upgrade -y
+     sudo apt update
      ```  
    - Install **Node.js**:  
      ```sh
