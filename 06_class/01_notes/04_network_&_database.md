@@ -11,6 +11,8 @@ docker build -t testing-app .
 
 docker run --name backend --network testing -p 3000:3000 testing-app
 
+docker network rm testing
+
 ```
 
 

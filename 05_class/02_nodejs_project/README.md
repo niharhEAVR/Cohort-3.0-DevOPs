@@ -28,4 +28,4 @@ docker rmi < image id >
 
 
 
-### after the push go to the 03_dockerfile_testing
+### after the push go to the 03_dockerfile_testing folder
