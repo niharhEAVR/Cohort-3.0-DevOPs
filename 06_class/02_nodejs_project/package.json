@@ -1,0 +1,20 @@
+{
+  "name": "02_nodejs_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -b"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "typescript": "^5.8.2"
+  }
+}
