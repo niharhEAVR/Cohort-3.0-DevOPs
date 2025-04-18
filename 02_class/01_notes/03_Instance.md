@@ -32,10 +32,7 @@ give a name, select an OS then you will need know these stuffs thens selects:
 ✅ **How it Works:**  
 - When launching an EC2 instance, you are asked to **create or select a key pair**.  
 - If you don’t have one, create a **new key pair** and download the `.pem` file.  
-- When connecting via SSH, use:
-  ```bash
-  ssh -i your-key.pem ec2-user@your-public-ip
-  ```
+- This keypair will use further
 
 
 ### **In Summary**

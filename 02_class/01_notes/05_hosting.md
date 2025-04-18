@@ -15,7 +15,7 @@ If you don’t understand something from the link, follow the steps below.
 
 Run the following command to clone the repository:  
 ```bash
-git clone https://github.com/hkirat/sum-server
+git clone https://github.com/Nihar-Debnath/testing-2.git
 ```
 
 ---
@@ -47,7 +47,7 @@ nvm install --lts
 
 Navigate into the cloned repository:  
 ```bash
-cd sum-server
+cd testing-2
 ```
 
 Check if Node.js and npm are installed correctly:  

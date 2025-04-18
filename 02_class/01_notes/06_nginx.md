@@ -8,104 +8,7 @@ https://projects.100xdevs.com/tracks/g0AcDSPl74nk45ZZjRdU/aws-7
 ### **What is Nginx?**  
 Nginx (pronounced "Engine-X") is a high-performance **web server**, **reverse proxy**, and **load balancer**. It is widely used for hosting websites, handling HTTP requests, and efficiently managing traffic.  
 
-### **Problems Nginx Solves When Hosting a Website on AWS**
-When you host a website on AWS (or any cloud platform), Nginx helps solve several challenges:
 
-#### **1. Serving Static and Dynamic Content Efficiently**
-   - Nginx can serve **static files** (HTML, CSS, JavaScript, images) directly without requiring a backend.
-   - For **dynamic content**, it can forward requests to an application server like Node.js, Python, or PHP.
-
-   ✅ **Solution:** Reduces load on backend servers and improves response times.
-
-#### **2. Reverse Proxy for Backend Services**
-   - Suppose your app is running on `localhost:8080`, but you want users to access it via `http://yourdomain.com/`.
-   - Nginx acts as a **reverse proxy**, forwarding incoming requests to your backend.
-
-   ✅ **Solution:** Users interact with `http://yourdomain.com`, while the backend remains hidden.
-
-   ```nginx
-   location / {
-       proxy_pass http://localhost:8080;
-   }
-   ```
-
-#### **3. Load Balancing**
-   - If your app runs on multiple instances (`localhost:8080`, `localhost:8081`, etc.), Nginx can distribute incoming requests across them.
-
-   ✅ **Solution:** Prevents any single instance from getting overloaded.
-
-   ```nginx
-   upstream backend_servers {
-       server localhost:8080;
-       server localhost:8081;
-   }
-
-   location / {
-       proxy_pass http://backend_servers;
-   }
-   ```
-
-#### **4. Handling SSL/TLS (HTTPS)**
-   - AWS provides an **Elastic Load Balancer (ELB)** for SSL, but you can also set up **Let's Encrypt** with Nginx.
-
-   ✅ **Solution:** Secure connections (HTTPS) for better security.
-
-   ```nginx
-   server {
-       listen 443 ssl;
-       server_name yourdomain.com;
-
-       ssl_certificate /path/to/fullchain.pem;
-       ssl_certificate_key /path/to/privkey.pem;
-
-       location / {
-           proxy_pass http://localhost:8080;
-       }
-   }
-   ```
-
-#### **5. Caching for Performance**
-   - Nginx can cache responses from the backend, reducing database and server load.
-
-   ✅ **Solution:** Faster load times and reduced backend processing.
-
-   ```nginx
-   location / {
-       proxy_cache my_cache;
-       proxy_pass http://localhost:8080;
-   }
-   ```
-
-#### **6. Security and Rate Limiting**
-   - Nginx can block bad requests, limit the number of requests per user, and prevent DDoS attacks.
-
-   ✅ **Solution:** Protects your website from abuse.
-
-   ```nginx
-   limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s;
-
-   location / {
-       limit_req zone=one;
-       proxy_pass http://localhost:8080;
-   }
-   ```
-
-### **Conclusion**
-Nginx is a powerful tool for deploying websites on AWS because it:
-- Serves static and dynamic content efficiently.
-- Acts as a **reverse proxy** for backend services.
-- Distributes traffic using **load balancing**.
-- Secures traffic with **SSL/TLS**.
-- Improves **performance with caching**.
-- Enhances **security with rate limiting**.
-
-### Would you like help setting up Nginx on AWS? 🚀
-
-
-### **Setting Up Nginx on AWS (Step-by-Step)**
-Let's configure Nginx to serve your application on an **AWS EC2 instance**.
-
----
 
 ## **Step 1: Connect to Your AWS EC2 Instance**
 1. Open a terminal and connect to your EC2 instance using SSH:
@@ -116,7 +19,6 @@ Let's configure Nginx to serve your application on an **AWS EC2 instance**.
    - Replace `ubuntu` with your EC2 username (e.g., `ec2-user` for Amazon Linux, `ubuntu` for Ubuntu).
    - Replace `your-public-ip` with your EC2 instance’s public IP.
 
----
 
 ## **Step 2: Install Nginx**
 Once connected, install Nginx using:
@@ -145,13 +47,43 @@ sudo systemctl status nginx
 You should see an **"active (running)"** status.
 
 ---
+---
+
+Sure! Here's a cleaner and corrected version of your instructions:
+
+---
+
+In the meantime, go to BigRock and log in:  
+👉 [https://myorders.bigrock.in/dashboard](https://myorders.bigrock.in/dashboard)
+
+1. Open the domain name you purchased.
+2. Go to the **DNS Records** section.
+3. Create a new **A Record**:
+   - In the **Domain/Subdomain** field, enter: `test`
+   - In the **IPv4 Address** field, enter your **AWS instance's public IP address**
+   - Save the record.
+
+4. After saving, open your terminal and run:
+   ```bash
+   ping test.niharheavrdevs.online
+   ```
+   - If it returns your AWS IP, the DNS record is set up correctly ✅
+
+5. Now you can use `test.niharheavrdevs.online` in your Nginx configuration.
+
+##### We are doing this because we don't want to expose our AWS IP address directly. So instead, we're using a DNS (domain name) to point to our server. Otherwise, you could directly use the AWS IP in the Nginx configuration.
+
+---
+---
 
 ## **Step 3: Configure Nginx as a Reverse Proxy**
 ### **Modify the Default Configuration**
 Edit the Nginx configuration file:
 (for some Linux distros):
 ```bash
-sudo nano /etc/nginx/nginx.conf
+sudo nano /etc/nginx/nginx.conf 
+# or 
+sudo vi /etc/nginx/nginx.conf
 ```
 
 Replace the existing content with this configuration:
@@ -163,9 +95,7 @@ events {
 http {
 	server {
     listen 80;
-    server_name _;  # This allows access from any IP or 
-    server_name <YOUR_PUBLIC_IP>; # You can put your own aws ip address
-    # Either any IP or your own aws ip, only one server_name should put over there not two
+    server_name <YOUR_DOMAIN_NAME>; # put your sub-domain name here
 
         location / {
             proxy_pass http://localhost:8080;  # Change this if your app runs on a different port
@@ -195,7 +125,7 @@ sudo nginx -s reload
 ## **Step 6: Test the Setup**
 1. Open a browser and go to:
    ```
-   http://your-public-ip
+   http://your-domain-name
    ```
    - If everything is working, you should see either **your application or the Nginx welcome page**.
 
@@ -217,7 +147,7 @@ Let me know if you face any issues!
 ---
 
 
-Yes, you can configure **multiple server blocks** in Nginx to serve different domains or IP-based configurations on the same AWS instance.
+For configure **multiple server blocks** in Nginx to serve different domains or IP-based configurations on the same AWS instance.
 
 ### **Example: Multiple Domains on the Same Nginx Server**
 If you want to host multiple domains (e.g., `example.com` and `example2.com`), you can create **separate `server` blocks** like this:
@@ -231,7 +161,7 @@ http {
     # Server block for example.com
     server {
         listen 80;
-        server_name example.com www.example.com;
+        server_name example.com;
 
         location / {
             proxy_pass http://localhost:8080;
@@ -246,7 +176,7 @@ http {
     # Server block for example2.com
     server {
         listen 80;
-        server_name example2.com www.example2.com;
+        server_name example2.com;
 
         location / {
             proxy_pass http://localhost:9090; # Different backend service
