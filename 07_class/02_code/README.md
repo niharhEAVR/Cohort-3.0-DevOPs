@@ -3,11 +3,11 @@
 ```sh
 docker network create testing
 
-docker run --name postgres --network testing -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres 
+docker run --name postgres --network testing -e POSTGRES_PASSWORD=me -d -p 5432:5432 postgres 
 
 docker build -t user-app .
 
-docker run --name user-app --network testing -e DATABASE_URL=postgres://postgres:mysecretpassword@postgres:5432 -p 3000:3000 user-app # or
+docker run --name user-app --network testing -e DATABASE_URL=postgres://postgres:me@postgres:5432 -p 3000:3000 user-app # or
 
 docker run --name user-app --network testing --env-file .env -p 3000:3000 user-app
 
@@ -15,11 +15,9 @@ docker run --name user-app --network testing --env-file .env -p 3000:3000 user-a
 docker network rm testing
 docker network ls
 
+psql "postgres://postgres:me@localhost:5432"
 
-psql "postgres://postgres:mysecretpassword@localhost:5432"
 ```
-
-### ------------------------------------------------------------
 
 ---
 
@@ -31,8 +29,22 @@ psql "postgres://postgres:mysecretpassword@localhost:5432"
 
 docker-compose up
 
+psql "postgres://postgres:me@localhost:5432"
 
+```
 
-psql "postgres://postgres:mysecretpassword@localhost:5432"
+---
+
+### ------------------------------------------------------------
+
+```sql
+
+\dt
+
+SELECT * FROM "user";
+
+DELETE FROM "user";
+
+\q
 
 ```

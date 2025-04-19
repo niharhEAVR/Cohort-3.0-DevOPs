@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-const mongoUrl: string = 'mongodb://mongoDb:27017/myDatabase';
+const mongoUrl: string = 'mongodb://mongoDb:27017/users';
 
 mongoose.connect(mongoUrl)
   .then(() => console.log('MongoDB connected'))

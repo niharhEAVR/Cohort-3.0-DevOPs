@@ -10,6 +10,6 @@ RUN npm install
 COPY . .
 RUN npm run dev
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD ["node","dist/index.js"]

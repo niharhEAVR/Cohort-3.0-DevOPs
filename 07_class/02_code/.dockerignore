@@ -1,2 +1,11 @@
 node_modules
 dist
+Dockerfile
+docker-compose.yml 
+# docker-compose.yml need for build so we dont need it on the container
+
+.env
+.env.example
+.git
+.gitignore
+README.md

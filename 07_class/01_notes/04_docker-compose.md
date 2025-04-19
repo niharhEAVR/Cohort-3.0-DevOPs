@@ -51,7 +51,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=me
 ```
 - Pulls the **PostgreSQL** image from Docker Hub.  
 - Runs PostgreSQL and exposes **port 5432**.  
@@ -73,7 +73,7 @@ services:
 #### **3️⃣ Setting Up Environment Variables**
 ```yaml
     environment:
-      - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/postgres
+      - DATABASE_URL=postgresql://postgres:me@postgres:5432/postgres
 ```
 - Defines `DATABASE_URL` to connect to **PostgreSQL running in Docker**.  
 - Uses `postgres` as the hostname (since Docker Compose creates an internal network).  
@@ -107,7 +107,7 @@ Modify `docker-compose.yml` to wait for PostgreSQL:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=me
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 5s
@@ -161,7 +161,7 @@ docker-compose logs -f user-app
 ---
 
 
-### if you are facing the problem same from 03_possible_problem.md then Use **`healthcheck`** to prevent Prisma from failing due to PostgreSQL not being ready.
+### if you are facing the problem same from 05_possible_problem.md then Use **`healthcheck`** to prevent Prisma from failing due to PostgreSQL not being ready.
 
 
 ### **How to Use `healthcheck` to Ensure PostgreSQL is Ready Before Starting `user-app`**
@@ -191,7 +191,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=me
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 5s
@@ -204,7 +204,7 @@ services:
       dockerfile: Dockerfile
     
     environment:
-      - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/postgres
+      - DATABASE_URL=postgresql://postgres:me@postgres:5432/postgres
   
     ports:
       - 3000:3000

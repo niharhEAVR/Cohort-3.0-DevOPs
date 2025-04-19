@@ -5,16 +5,14 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=me
   
   user-app:
     build:
       context: ./ 
       dockerfile: Dockerfile
-    
     environment:
-      - DATABASE_URL=postgresql://postgres:mysecretpassword@postgres:5432/postgres
-  
+      - DATABASE_URL=postgresql://postgres:me@postgres:5432
     ports:
       - 3000:3000
     depends_on:

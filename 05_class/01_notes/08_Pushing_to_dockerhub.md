@@ -212,27 +212,71 @@ This behavior ensures that credentials are not left behind, improving security.
 ---
 ### After the login do this:
 
+### 🐳 **What you tried:**
+You ran:
+```sh
+docker push hello-world-app
+```
+You expected it to push your Docker image to Docker Hub (your personal repository), but it **failed**.
+
+---
+
+### ❌ **The Error:**
+```sh
+push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+```
+
+This means:
+- Docker tried to push the image, but **it didn’t know where exactly to push it**.
+- It **assumed** you wanted to push to the **default public Docker Hub repo** called `docker.io/library/hello-world-app`, which you don’t own.
+- Since you don’t own that repo, Docker said “access denied.”
+
+---
+
+### 🧠 **Why this happens:**
+When you **create** a Docker image like:
+```sh
+docker build -t hello-world-app .
+```
+
+You’ve only named the image locally as `hello-world-app`, **without any Docker Hub username or registry path**.
+
+When you run:
 ```sh
 docker push hello-world-app
 ```
 
-### **Why Did `docker push` Fail?** 🤔  
-
-The error message:  
-```sh
-push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+Docker assumes you're trying to push to:
 ```
-indicates that Docker **was unable to push your image** due to authentication or repository issues.  
+docker.io/library/hello-world-app
+```
+
+🔒 `library/` is reserved for **official images** on Docker Hub (like `nginx`, `node`, `ubuntu`, etc.) — you don’t have permission to push there.
 
 ---
 
-#### **You Are Pushing to the Wrong Repository**
-By default, Docker tries to push to **`docker.io/library/hello-world-app`**, which is **not your personal repository**.
+### ✅ **The Solution – Tag it properly:**
+Before pushing, you need to tell Docker:
+> "Hey, I want to push this image to **my own Docker Hub account**."
 
-✅ **Solution:** Tag the image correctly before pushing:  
+You do that by **tagging** the image like this:
 ```sh
 docker tag hello-world-app YOUR_DOCKERHUB_USERNAME/hello-world-app
+```
+
+This tells Docker:
+> “Push this image to `docker.io/YOUR_DOCKERHUB_USERNAME/hello-world-app`” — which you own and have permission to access.
+
+Then push:
+```sh
 docker push YOUR_DOCKERHUB_USERNAME/hello-world-app
 ```
 
-If it still fails, check your **Docker Hub repository settings** and **ensure you are logged into the correct account**.
+---
+
+### 🔁 Summary:
+| Step | What it does |
+|------|---------------|
+| `docker build -t hello-world-app .` | Builds a local image with a name (but not tied to your Docker Hub account) |
+| `docker tag ...` | Gives the image a **new name with your Docker Hub username**, so Docker knows where to push it |
+| `docker push ...` | Actually pushes the image to Docker Hub — and **now it works**, because it’s going to the right place |

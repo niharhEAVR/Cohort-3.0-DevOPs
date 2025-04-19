@@ -1,0 +1,46 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [production]
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY_LAPTOP }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 15.206.117.182 >> ~/.ssh/known_hosts
+
+      - name: SSH and deploy
+        run: |
+          ssh -i ~/ssh_key ubuntu@15.206.117.182 -o StrictHostKeyChecking=no -t '
+            export NVM_DIR=$HOME/.nvm;
+            source $NVM_DIR/nvm.sh;
+            nvm use 22.13.1;
+            cd testing/;
+            git pull origin production;
+            npm install -g pnpm;
+            pnpm install;
+            pnpm run build;
+            pm2 restart web;
+            pm2 restart http-server;
+            pm2 restart ws-server;
+          '
+
+
+
+### 🔧 What's Fixed & Improved?
+
+# | 🔧 Change                  | ✅ Reason                          |
+# |----------------------------|-------------------------------------|
+# | Split steps with names     | Easier to debug                     |
+# | Removed redundant chmod    | `644` not needed for `known_hosts`  |
+# | `StrictHostKeyChecking=no` | Avoids prompts if known_hosts fails |
+# | Cleaner formatting         | Simpler & shorter                   |

@@ -13,18 +13,89 @@ Databases require **persistent storage** to retain data even after a container r
 ### **How Volumes Work with Databases?**
 When a database (like MySQL, PostgreSQL, or MongoDB) runs inside a container, it stores its data in a default directory (e.g., `/var/lib/mysql` for MySQL). By **mounting a volume** to this directory, we ensure that the database files persist beyond the container's lifecycle.
 
-#### **Example: Using Volumes with MySQL**
+Perfect timing! Docker **volumes** are super important for things like databases — especially MongoDB — because you want to **persist data** even after a container is stopped or deleted.
+
+## 🚀 Example: Run MongoDB with Docker Volume
+
+### 📦 Step 1: Create a Docker Volume
+
+```sh
+docker volume create mongo-data
+```
+
+✅ This creates a **named volume** called `mongo-data`.
+
+Think of this as a **special folder managed by Docker**, stored outside the container — so even if the container is deleted, your **MongoDB data lives on**.
+
+---
+
+### 🐳 Step 2: Run MongoDB Container Using That Volume
+
 ```sh
 docker run -d \
-  --name mysql-container \
-  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
-  -v mysql-data:/var/lib/mysql \
-  mysql:latest
+  --name mongo-container \
+  -p 27017:27017 \
+  -v mongo-data:/data/db \
+  mongo
 ```
-### **Explanation:**
-- `-v mysql-data:/var/lib/mysql` → Mounts the **named volume** `mysql-data` to the database storage directory.
-- When the container stops or is removed, `mysql-data` still exists, keeping the database files intact.
-- If a new container is started using `mysql-data`, the database will **retain its data**.
+
+### 🔍 Breaking it down:
+
+| Part                      | Explanation |
+|--------------------------|-------------|
+| `docker run -d`          | Runs container in detached mode (in background). |
+| `--name mongo-container` | Gives the container a custom name. |
+| `-p 27017:27017`         | Maps port 27017 on your host to MongoDB's default port. |
+| `-v mongo-data:/data/db` | Mounts the Docker volume `mongo-data` into the container’s `/data/db` folder — which is where MongoDB stores data. |
+| `mongo`                  | Uses the official MongoDB image from Docker Hub. |
+
+---
+
+### ✅ Result
+
+Now any data you insert into MongoDB is stored inside the `mongo-data` volume, not inside the container.  
+So even if you do:
+
+```sh
+docker rm -f mongo-container
+```
+
+...your data **will still be there**.
+
+You can then run:
+
+```sh
+docker run -d \
+  --name mongo-container-again \
+  -p 27017:27017 \
+  -v mongo-data:/data/db \
+  mongo
+```
+
+...and MongoDB will **load all the same data**.
+
+---
+
+## 📂 Where Is the Volume Stored?
+
+Docker stores volumes in a path like:
+
+```
+/var/lib/docker/volumes/mongo-data/_data
+```
+
+But you don’t need to worry about that — Docker manages it for you.
+
+---
+
+## 🛠 Useful Commands
+
+| Command | Description |
+|--------|-------------|
+| `docker volume ls` | List all volumes |
+| `docker volume inspect mongo-data` | Show details about the volume |
+| `docker volume rm mongo-data` | Delete the volume (⚠️ data loss!) |
+| `docker volume prune` | Delete **unused** volumes |
 
 ---
 
