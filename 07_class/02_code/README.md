@@ -28,6 +28,8 @@ psql "postgres://postgres:me@localhost:5432"
 ```sh
 
 docker-compose up
+# or
+docker-compose up -d # for running it on the background
 
 psql "postgres://postgres:me@localhost:5432"
 
