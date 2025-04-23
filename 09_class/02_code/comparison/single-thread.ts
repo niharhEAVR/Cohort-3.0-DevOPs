@@ -8,4 +8,5 @@ for (let i = 0; i < target; i++) {
 
 const endTime = Date.now()
 
-console.log(`Totol time: ${endTime-startTime} ms`)
+console.log(`Total sum: ${count}`)
+console.log(`Total time: ${endTime-startTime} ms`)
