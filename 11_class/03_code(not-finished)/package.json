@@ -1,0 +1,19 @@
+{
+  "name": "03_code",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-auto-scaling": "^3.796.0",
+    "@aws-sdk/client-ec2": "^3.796.0",
+    "@types/express": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
