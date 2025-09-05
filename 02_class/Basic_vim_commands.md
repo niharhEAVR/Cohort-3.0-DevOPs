@@ -1,8 +1,5 @@
 ### **Essential Vim Commands for Work 🚀**  
 
-Since you're a **developer**, you'll frequently use Vim for **editing code, configuration files, and logs**. Here are the most important Vim commands you should know:
-
----
 
 ## **🔹 Basic Navigation**
 | Command            | Description |
@@ -105,7 +102,3 @@ Since you're a **developer**, you'll frequently use Vim for **editing code, conf
 ✅ Always **switch to Normal mode (`Esc`) before using commands**.  
 ✅ Use `:help command` to get more info about a Vim command.  
 ✅ Practice using Vim in your **configuration files (like `.bashrc`, `.vimrc`, `nginx.conf`)** to get comfortable.  
-
----
-
-Would you like a **cheat sheet** or **practice exercises** to get better at Vim? 😊

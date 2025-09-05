@@ -1,4 +1,4 @@
-when you create a new **key pair** in AWS EC2, it will generate a `.pem` file (e.g., `my-key.pem`).  
+## When you create a new **key pair** in AWS EC2, it will generate a `.pem` file (e.g., `my-key.pem`).  
 
 This file is downloaded to your **local Downloads folder** (or the location where your browser saves downloads).  
 
@@ -54,7 +54,72 @@ chmod 700 my_key.pem
 
 - In **WSL (Windows Subsystem for Linux)**, the Linux home directory (`/home/nihar`) is located inside WSL’s **virtual filesystem**, separate from Windows' filesystem (`C:\`).  
 
-#### **How to Access It in Windows Explorer?**
+---
+
+We need to move the AWS ssh private key (.pem file) into your **WSL Ubuntu `~/.ssh`** folder.
+
+Here’s the step-by-step:
+
+---
+
+### 1. Locate your key in Windows
+
+Let’s say your private key is:
+
+```
+C:\Users\<YourName>\Downloads\mykey.pem
+```
+
+### 2. Open your WSL terminal
+
+Launch Ubuntu (WSL) from Start menu or Windows Terminal.
+
+### 3. Make sure the `.ssh` folder exists
+
+```bash
+ls -al
+```
+
+if no `.ssh` folder presents then do these
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+```
+
+### 4. Copy or Move the key from Windows → WSL
+
+In WSL, Windows drives are mounted under `/mnt/`.
+For example, your Downloads folder is usually at:
+
+```
+/mnt/c/Users/<YourName>/Downloads/
+```
+
+So run:
+
+```bash
+cp /mnt/c/Users/<YourName>/Downloads/mykey.pem  ~/.ssh/ # for copy only, original will remain in the windows download folder
+
+mv /mnt/c/Users/<YourName>/Downloads/mykey.pem  ~/.ssh/ # no longer available in windows download folder
+```
+
+### 5. Fix file permissions (super important)
+
+```bash
+chmod 600 ~/.ssh/mykey.pem # or
+chmod 700 ~/.ssh/mykey.pem
+```
+
+### 6. Use the key to connect
+
+```bash
+ssh -i ~/.ssh/mykey.pem <OS-or-User-name>@<SERVER_IP>
+```
+---
+
+### Another simpler way is:
+
 1. **Open Windows Explorer**
 2. In the address bar, type:
    ```
@@ -63,9 +128,14 @@ chmod 700 my_key.pem
    (Replace `Ubuntu` with your actual WSL distribution name if different.)
 3. Press **Enter**, and it will open your Linux home folder.
 
-- Then copy the my_token.pem from the download folder and paste the file in the ubuntu directory or in the .ssh folder of the ubuntu directory
+4. Then copy the my_token.pem from the download folder and paste the file in the ubuntu directory or in the .ssh folder of the ubuntu directory
 
-## What the command actually does?
+5. it is the easiest, now need to write any `cp` or `mv` command except the permission command `(chmod)`
+
+---
+---
+---
+
 
 ### **Understanding `chmod 600` and `chmod 700` in Linux File Permissions**
 

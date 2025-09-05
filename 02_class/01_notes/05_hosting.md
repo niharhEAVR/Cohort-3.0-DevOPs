@@ -1,15 +1,5 @@
-Here's a properly formatted and structured version of your instructions:  
-
----
-
 ## 🚀 AWS EC2 Setup & Running an Express App  
 
-If you need additional guidance, check this link:  
-🔗 [AWS EC2 Guide](https://projects.100xdevs.com/tracks/g0AcDSPl74nk45ZZjRdU/aws-4)  
-
-If you don’t understand something from the link, follow the steps below.  
-
----
 
 ### 🛠️ **Step 1: Clone the GitHub Repository**  
 
@@ -77,5 +67,3 @@ node index.js
 ```
 
 Your Express server should now be running on your AWS EC2 instance! 🎉  
-
-Let me know if you need further clarification. 🚀

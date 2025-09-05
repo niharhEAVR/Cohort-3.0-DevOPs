@@ -1,8 +1,6 @@
-```link
-https://projects.100xdevs.com/tracks/g0AcDSPl74nk45ZZjRdU/aws-7
-```
 
-### Visit this link before reading the whole document, and understsnd the pictures first then relate it with texts
+
+### Visit this [link](https://projects.100xdevs.com/tracks/g0AcDSPl74nk45ZZjRdU/aws-7) before reading the whole document, and understsnd the pictures first then relate it with texts
 
 
 ### **What is Nginx?**  

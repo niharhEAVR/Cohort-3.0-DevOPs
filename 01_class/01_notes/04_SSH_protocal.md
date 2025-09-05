@@ -19,7 +19,6 @@ SSH (**Secure Shell**) is a **cryptographic network protocol** used to securely 
 ---
 
 
-Alright bro, let me break it down simply.  
 
 ### **What is SSH?**  
 SSH (Secure Shell) is like a **remote control for computers**. It lets you connect to another computer (like a server or virtual machine) **securely** over the internet. Instead of physically sitting in front of the computer, you can type commands from your own device and control it.  

@@ -88,7 +88,3 @@ Nginx is a powerful tool for deploying websites on AWS because it:
 - Secures traffic with **SSL/TLS**.
 - Improves **performance with caching**.
 - Enhances **security with rate limiting**.
-
-
-### **Setting Up Nginx on AWS (Step-by-Step)**
-Let's configure Nginx to serve your application on an **AWS EC2 instance**.

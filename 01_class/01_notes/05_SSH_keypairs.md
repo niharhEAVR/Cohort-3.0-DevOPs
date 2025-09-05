@@ -22,7 +22,7 @@ An SSH key pair consists of:
 ✅ No Need to Remember Passwords  
 ✅ Faster and Automated Access  
 
-Would you like a step-by-step guide for setting up SSH keys on a cloud VM? 🚀
+Would you like a step-by-step guide for setting up SSH keys on a cloud VM? 🚀   
 
 Alright bro! Here’s a **step-by-step guide** to setting up **SSH key-based authentication** for a cloud VM. 🚀  
 

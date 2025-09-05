@@ -1,7 +1,3 @@
-No worries! Let me break it down in a simpler way with a **real-world example** so you can clearly understand the benefits of SSH cloning over HTTPS cloning.  
-
----
-
 ## **🔹 Imagine Two Scenarios: You Work on a Private GitHub Repo**
 ### **🔸 Scenario 1: Using HTTPS Cloning**
 1️⃣ You run:  
@@ -69,10 +65,12 @@ git clone git@github.com:vercel/next.js.git      # Requires SSH key setup
 Do you work with **private repositories**, CI/CD, or do you push often?  
 If **yes**, then SSH is better. 🚀 If **no**, HTTPS is fine.  
 
-Let me know if this makes sense! 😊
+---
+---
+---
 
 
-Ah, I see what you mean! You haven’t faced this issue because of one of the following reasons:
+## You haven’t faced this issue because of one of the following reasons:
 
 ### **1️⃣ You Have Cached Your Credentials**
 Git automatically caches your credentials for HTTPS, so you don’t need to enter them every time. You can check if credential caching is enabled by running:  
@@ -119,5 +117,3 @@ If it returns a key, then SSH authentication is running in the background.
 ✅ More secure (no risk of token leaks).  
 ✅ Easier for automation (CI/CD, multiple devices).  
 ✅ No need to reauthenticate **even on a new machine** (just copy your SSH key).  
-
-Would you like to check how your Git is authenticating? I can help! 😊
