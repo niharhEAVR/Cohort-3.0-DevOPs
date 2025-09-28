@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { userModel } = require("./db")
 const app = express()
+require('dotenv').config()
 
 mongoose.connect(process.env.DATABASE_URL)
 console.log(process.env.DATABASE_URL);

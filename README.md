@@ -48,3 +48,17 @@ sudo docker --version
 ### How to deploy your website to production in 30 minutes
 
 🔗 [How to deploy your website to production in 30 minutes](https://www.youtube.com/watch?v=gViEtIJ1DCw)
+
+
+---
+
+### How to ssh into a aws machine
+
+```sh
+ssh -i ~/.ssh/mykey.pem <OS-or-User-name>@<SERVER_IP>
+```
+
+
+---
+
+### Upto 06_class revision is done

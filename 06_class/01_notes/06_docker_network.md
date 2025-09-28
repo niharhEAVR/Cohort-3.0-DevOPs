@@ -1,9 +1,3 @@
-Great question! Understanding **Docker networks** is super important when you're running **multiple containers** that need to talk to each other — like a **Node.js app and a MongoDB container**.
-
-Let’s break it down like a story:
-
----
-
 ## 🤔 Why Do We Need Docker Networks?
 
 Imagine you have:

@@ -1,7 +1,3 @@
-Sure! Let’s dive deep into what **linting** is and how it works in a project, especially in the context of software development (JavaScript, TypeScript, etc.).
-
----
-
 ## 🔍 What is Linting?
 
 **Linting** is the process of **analyzing source code** to flag programming errors, bugs, stylistic errors, and suspicious constructs.  

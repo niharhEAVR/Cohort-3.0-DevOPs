@@ -153,7 +153,9 @@ docker run nginx
 3. **Docker Registry** stores and shares images.  
 
 ---
-### so docker registry is slightly same as nmp registry, like when we do npm i express then npm registry downloads the express image and use it 
+
+
+### so docker registry is slightly same as npm registry, like when we do npm i express then npm registry downloads the express image and use it 
 
 Yes! You're absolutely right! 🔥  
 
@@ -184,10 +186,3 @@ The key difference is **npm installs libraries into your project**, while **Dock
 docker run -p 27017:27017 mongo
 mongodb://localhost:27017 # Connect this in mongodbCompass
 ```
-
----
----
----
-
-Would you like to set up a private Docker registry like GitHub Container Registry or AWS ECR? 😊
-Would you like an example of how to set up a simple project using Docker? 😊

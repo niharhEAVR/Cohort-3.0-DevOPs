@@ -15,10 +15,7 @@ docker run -d -p 3000:3000 --name backend --network testing users-app
 docker network rm testing
 ```
 ---
-Absolutely! Let's break down each of these commands **in very very detailed, beginner-friendly terms** so you know exactly what each line is doing and **why** you’re doing it.
-
----
-
+ 
 ## 🔧 Step-by-Step Breakdown
 
 ---

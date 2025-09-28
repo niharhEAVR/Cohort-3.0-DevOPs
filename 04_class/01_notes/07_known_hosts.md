@@ -1,7 +1,3 @@
-Great! Let’s strip it **down to the core** and understand exactly what `known_hosts` is and **why it's used**.
-
----
-
 ## 🔐 What is `known_hosts`?
 
 It’s a **security file used by SSH** that stores the **identities (fingerprints)** of the remote servers you've connected to.
