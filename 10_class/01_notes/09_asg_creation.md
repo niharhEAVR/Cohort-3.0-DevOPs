@@ -1,7 +1,77 @@
-Awesome! You're about to set up **Auto Scaling with a new Load Balancer** from scratch — that's a big milestone in building scalable apps on AWS.
+## 🧩 What is an **ASG (Auto Scaling Group)** in AWS?
 
-Let’s go step-by-step and I’ll **explain every part in deep detail** so you fully understand what you’re doing and *why* you're doing it.
+**ASG = Auto Scaling Group**
+It’s an AWS service that **automatically manages a group of EC2 instances** for you —
+it can **launch**, **stop**, or **terminate** instances based on demand, health, or schedules.
 
+---
+
+### ⚙️ In simple words:
+
+> An ASG keeps your app running with the **right number of EC2 instances** — not too many (to save cost), and not too few (to handle traffic).
+
+---
+
+### 🧠 Example
+
+Let’s say you run a web app and want:
+
+* **Minimum 2 EC2 instances**
+* **Maximum 5 EC2 instances**
+* Target CPU usage: **50%**
+
+Then the ASG will:
+
+* Start with 2 instances.
+* If traffic grows and CPU > 50%, it’ll **add** more EC2s (scale out).
+* If traffic drops and CPU < 50%, it’ll **terminate** some (scale in).
+* If any instance crashes, it’ll **replace** it automatically.
+
+So your app stays available — **without you manually starting or stopping EC2s.**
+
+---
+
+### 🔗 ASG + Target Group + Load Balancer
+
+These three often work together:
+
+1. **Load Balancer (ALB/NLB)** → routes user traffic
+2. **Target Group** → connects the Load Balancer to EC2s
+3. **Auto Scaling Group (ASG)** → automatically creates/removes EC2s and registers them to the Target Group
+
+So:
+
+```
+User → Load Balancer → Target Group → Auto Scaling Group → EC2 Instances
+```
+
+---
+
+### 🧾 Key Components of an ASG
+
+| Component                           | Description                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------- |
+| **Launch Template / Launch Config** | Blueprint for new instances (AMI, instance type, security group, etc.) |
+| **Desired Capacity**                | How many instances you want running by default                         |
+| **Min / Max Size**                  | Lower and upper limits for auto-scaling                                |
+| **Scaling Policies**                | Rules that tell AWS when to add/remove instances (e.g., CPU > 70%)     |
+| **Health Checks**                   | Replaces unhealthy instances automatically                             |
+| **Target Group Attachment**         | Ensures all instances are registered behind your Load Balancer         |
+
+---
+
+### 🧠 TL;DR
+
+| Feature                          | What It Does                                    |
+| -------------------------------- | ----------------------------------------------- |
+| **ASG (Auto Scaling Group)**     | Keeps the right number of EC2 instances running |
+| **Automatically scales**         | Adds or removes EC2s based on demand            |
+| **Self-healing**                 | Replaces failed instances                       |
+| **Integrates with Target Group** | So traffic routing happens automatically        |
+
+---
+---
+---
 ---
 
 # 🚀 Goal
@@ -71,6 +141,8 @@ Here, a **listener** defines what port your load balancer listens to and where t
 You'll see:
 - **Protocol**: HTTP
 - **Port**: 80 (default web port)
+
+From load balancer it will send the traffic to 3000 port of the app but load balancer will listen users from port 80
 
 ---
 
@@ -192,8 +264,7 @@ Once created:
 ---
 ---
 
-
-Great question — you're now moving into **managing updates** in production-like environments. Let's walk through this in **very clear steps**, starting from updating your Launch Template to restarting the desired instances from scratch in the Auto Scaling Group (ASG).
+When you're now moving into **managing updates** in production-like environments. Let's walk through this in **very clear steps**, starting from updating your Launch Template to restarting the desired instances from scratch in the Auto Scaling Group (ASG).
 
 ---
 

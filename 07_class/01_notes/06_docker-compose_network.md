@@ -1,7 +1,3 @@
-Great observation — and you're absolutely right! Let me break it down for you clearly:
-
----
-
 ### ✅ When you're **using Docker CLI (manual setup)**:
 You have to **explicitly create and connect containers to a shared Docker network**, like:
 

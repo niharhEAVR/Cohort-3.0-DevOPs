@@ -1,4 +1,4 @@
-```
+```ts
 import express from "express";
 import cluster from "cluster";
 import os from "os";
@@ -28,13 +28,9 @@ if (cluster.isPrimary) {
     console.log(App listening on port ${port});
   });
 }
-
-
-
-
-
-in ths code how the cluster.isprimary is getting know that ist not a primary cluster and how it becomes false, and how did it know that the primary need to be true and also one thing is that using cluster module means that it will create a box and inside that box it will run a nojehs server and the box will run depends ony my total cpus
 ```
+
+> **In ths code how the cluster.isprimary is getting know that it is not a primary cluster and how it becomes false, and how did it know that the primary need to be true and also one thing is that using cluster module means that it will create a box and inside that box it will run a nodejs server and the box will run depends ony my total cpus**
 
 
 Great question — let’s **demystify** what’s happening with `cluster.isPrimary` (or in older versions, `cluster.isMaster`) and how Node.js handles **multi-process clustering**. 🧠
@@ -138,9 +134,7 @@ You still don’t get **true shared memory multithreading** (like Rust threads),
 ---
 ---
 
-```
-so that means when cluster froks a new worker then its  copies the whole code onto that worker and only changes cluster.isprimary makes false
-```
+> **so that means when cluster froks a new worker then its  copies the whole code onto that worker and only changes cluster.isprimary makes false**
 
 
 ✅ **Exactly — you're spot on!**

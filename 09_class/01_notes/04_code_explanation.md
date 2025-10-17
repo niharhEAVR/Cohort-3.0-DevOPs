@@ -216,6 +216,10 @@ if (cluster.isPrimary) {
 
 
 
+---
+---
+---
+
 
 
 
@@ -264,5 +268,3 @@ Which PID handled this process: 54322
 Which PID handled this process: 54323
 ```
 This proves that different worker processes are handling requests!
-
----

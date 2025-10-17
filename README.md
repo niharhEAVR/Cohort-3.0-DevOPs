@@ -52,13 +52,79 @@ sudo docker --version
 
 ---
 
-### How to ssh into a aws machine
+### How to ssh into an aws machine
 
 ```sh
 ssh -i ~/.ssh/mykey.pem <OS-or-User-name>@<SERVER_IP>
 ```
 
+---
+
+
+### PM2 commands daily-use:
+
+```bash
+pm2 start app.js --name myApp      
+# start app.js with a custom name "myApp"
+
+pm2 list                            
+# show all PM2-managed apps with status and uptime
+
+pm2 show myApp                      
+# display detailed information about "myApp"
+
+pm2 monit                           
+# real-time CPU, memory, and logs monitoring
+
+pm2 logs                            
+# stream logs for all apps
+pm2 logs myApp                      
+# stream logs only for "myApp"
+
+pm2 stop myApp                      
+# stop the running app "myApp"
+pm2 restart myApp                   
+# restart "myApp" (zero-downtime reload)
+pm2 reload all                      
+# reload all apps gracefully
+
+pm2 delete myApp                    
+# remove "myApp" from PM2 process list
+
+pm2 startup                         
+# generate startup script for your OS
+pm2 save                           
+
+
+pm2 -v                              
+# check PM2 version
+pm2 help                            
+# list all available PM2 commands
+
+pm2 list --sort memory              
+# list apps sorted by memory usage
+pm2 describe myApp                  
+# show detailed app metadata
+
+# Watch for file changes (auto-restart on change)
+pm2 start app.js --watch             
+# restart app automatically when files change
+
+pm2 update                           
+# update PM2 to latest stable version
+
+pm2 kill                             
+# stop and remove all PM2 processes + daemon
+```
 
 ---
 
-### Upto 06_class revision is done
+### Upto 10_class revision is done
+
+---
+
+# Todos
+
+1. `After the completetion of the Webdev` I have to came back on the 08_class for deeply understand the internal concept of ci/cd and github actions and docker-compose with dockerfile 
+
+2. This is load balancer root class and root scalling also so revise this `09_class` properly it will help to understand how load balancer & scaling works 

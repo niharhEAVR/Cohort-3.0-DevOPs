@@ -1,9 +1,3 @@
-Great question again! Understanding what an **image** is in AWS and how it's used is super important when working with EC2 and auto-scaling environments.
-
-Let’s dive in **very deeply and clearly**.
-
----
-
 ## 🖼️ What is an "Image" in AWS?
 
 In AWS, the term **Image** usually refers to:
@@ -203,22 +197,6 @@ Awesome! Let’s walk through a **step-by-step guide** on how to create and use 
 6. Click **Launch**.
 
 > 🔥 This new instance will be exactly like the original: same app, same config, ready-to-go.
-
----
-
-## ✅ PART 3: Use AMI in an Auto Scaling Group
-
-1. Go to **EC2 Dashboard** → **Auto Scaling Groups**
-2. Create a **Launch Template** (required for ASG)
-   - Use your **custom AMI** as the base image.
-   - Define instance type, key pair, security group, etc.
-3. Create an **Auto Scaling Group**
-   - Select the launch template you just created.
-   - Attach it to a **Load Balancer** if you want.
-   - Set min/max/desired instance count.
-   - Define scaling policies (e.g., scale up if CPU > 70%).
-
-> ✅ Now your app will automatically scale up/down with instances **based on your custom AMI**.
 
 ---
 

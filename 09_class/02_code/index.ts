@@ -1,4 +1,4 @@
-// Read the 05_code_explanation.md for understanding
+// Read the 04_code_explanation.md for understanding this program
 import express from "express";
 import cluster from "cluster";
 import os from "os";
@@ -53,4 +53,4 @@ if (cluster.isPrimary) {
 
 
 
-// if you still dont understood what is happening here then read 07_code_understanding.md
+// if you still dont understood what is happening here then read 05_code_understanding.md

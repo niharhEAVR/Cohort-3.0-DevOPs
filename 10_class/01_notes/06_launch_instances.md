@@ -1,9 +1,3 @@
-Perfect follow-up question! Understanding **Launch Templates** is super important if you’re working with **Auto Scaling Groups (ASGs)**, **EC2 fleets**, or just want to make launching EC2s easier and more consistent.
-
-Let’s go deep into what they are, how they work, and **why** they are useful. I’ll also give real-world examples and diagrams to make it crystal clear.
-
----
-
 ## 🧾 What is a **Launch Template** in AWS?
 
 A **Launch Template** is a reusable **configuration blueprint** for launching EC2 instances.
@@ -130,8 +124,9 @@ You have a Node.js web app that listens on port 3000.
 
 ```bash
 #!/bin/bash
-cd /home/ubuntu/app
-pm2 start index.js
+export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v22.20.0/bin
+pm2 ls
+pm2 start --interpreter /home/ubuntu/.nvm/versions/node/v22.20.0/bin/bun /home/ubuntu/ASG/index.ts
 ```
 
 Place this in the **User Data** field when creating the launch template.

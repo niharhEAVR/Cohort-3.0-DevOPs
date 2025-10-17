@@ -1,6 +1,4 @@
-```
-What about when we are doing it by github ci/cd pipeline then whats the way to reflect all the changes that made into the repo
-```
+>What about when we are doing it by github ci/cd pipeline then whats the way to reflect all the changes that made into the repo
 
 Excellent! You're now stepping into **automated deployments** — the real DevOps/production workflow using **CI/CD pipelines** connected with AWS 🚀
 

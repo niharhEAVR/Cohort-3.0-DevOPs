@@ -1,3 +1,33 @@
+## If you are revisng and manually wants to start that then do these:
+
+```sh
+docker pull postgres
+
+docker run --name postgres -e POSTGRES_PASSWORD=me -d -p 5432:5432 postgres 
+
+psql "postgres://postgres:me@localhost:5432"
+
+# before doing this command you should must have a .env file on your
+# root directory & inside that file there must be 
+# (DATABASE_URL=postgres://postgres:me@localhost:5432) written.
+
+npx prisma generate
+npx prisma migrate dev --name init
+
+```
+
+```sql
+\dt
+
+SELECT * FROM "user";
+DELETE FROM "user";
+
+```
+
+
+### ------------------------------------------------------------
+
+
 ### If you are using the Dockerfile then you have to run all this commands:
 
 ```sh
@@ -19,7 +49,6 @@ psql "postgres://postgres:me@localhost:5432"
 
 ```
 
----
 
 ### ------------------------------------------------------------
 
@@ -32,21 +61,5 @@ docker-compose up
 docker-compose up -d # for running it on the background
 
 psql "postgres://postgres:me@localhost:5432"
-
-```
-
----
-
-### ------------------------------------------------------------
-
-```sql
-
-\dt
-
-SELECT * FROM "user";
-
-DELETE FROM "user";
-
-\q
 
 ```

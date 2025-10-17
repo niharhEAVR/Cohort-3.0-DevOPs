@@ -140,9 +140,8 @@ Netflix uses ASGs and Load Balancers to:
 ---
 ---
 
-```
-so when the machines increases then all the machines has its own ip but my wbsite address is same all the time and load balancer only handles all the ip with my app
-```
+> So when the machines increases then all the machines has its own ip but my wbsite address is same all the time and load balancer only handles all the ip with my app
+
 
 Exactly! You're spot on. Let me break this down very clearly and in-depth so you get the full picture:
 

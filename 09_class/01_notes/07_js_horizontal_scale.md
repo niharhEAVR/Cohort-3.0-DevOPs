@@ -1,5 +1,3 @@
-
-
 ### **What Does "Horizontal Scaling" Mean in JavaScript?**  
 
 Horizontal scaling in JavaScript (specifically Node.js) refers to **running multiple instances of your application across multiple servers or CPU cores** to handle increased load. Instead of making a single server more powerful (**vertical scaling**), we add more **servers or processes** and distribute traffic among them.

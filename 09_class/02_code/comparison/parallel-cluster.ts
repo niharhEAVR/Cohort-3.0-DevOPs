@@ -14,6 +14,8 @@ if (cluster.isPrimary) {
 
   for (let i = 0; i < totalCPUs; i++) {
     const worker = cluster.fork();
+
+    // divide and conquer rule
     const start = i * (target / totalCPUs);
     const end = (i + 1) * (target / totalCPUs);
 

@@ -100,57 +100,68 @@ This is **crucial for microservices** or separating frontend/backend in the same
 - Separate target groups for backend workers, frontend, admin, etc.
 - Easy to apply permissions, monitoring, and scaling rules **per group**
 
+
 ---
 
-## 🧪 Real-World Setup Flow
+### 🧭 **Steps to Create a Target Group in AWS**
 
-1. **Create Target Group**
-   - Type: `instance`
-   - Protocol: `HTTP`
-   - Port: `3000`
-   - Health check: `/health`
+1. **Login to AWS Console**
 
-2. **Create Load Balancer**
-   - Type: ALB
-   - Listener: `:80` HTTP
-   - Rule: Forward all traffic to your target group
+   * Go to the [AWS Management Console](https://aws.amazon.com/console/)
+   * Open the **EC2** service.
 
-3. **Create Launch Template**
-   - With your AMI and User Data script (e.g., runs Bun app)
+2. **Navigate to Target Groups**
 
-4. **Create Auto Scaling Group**
-   - Attach the Launch Template
-   - Attach your **Target Group**
-   - Scaling policies: e.g., based on CPU utilization
+   * On the left sidebar, scroll down to **“Load Balancing” → “Target Groups”**.
+   * Click **“Create target group”**.
 
-5. ✅ When traffic increases:
-   - ASG adds more EC2s
-   - Each EC2 is **registered automatically** into the Target Group
-   - Load Balancer routes requests only to **healthy**, running EC2s
+3. **Choose Target Type**
+
+   * Select one of these based on what you’re routing traffic to:
+
+     * **Instances** → for EC2 instances
+     * **IP addresses** → for specific private IPs
+     * **Lambda function** → for AWS Lambda
+     * **Application Load Balancer (ALB)** or **Network Load Balancer (NLB)** → choose accordingly
+   * Usually, for EC2 apps, choose **Instances**.
+   * Click **Next**.
+
+4. **Configure Basic Settings**
+
+   * **Target group name** → choose a clear name (e.g. `my-app-tg`)
+   * **Protocol** → `HTTP` or `HTTPS`
+   * **Port** → your app’s port (e.g. `3000` or `80`)
+   * **VPC** → select the same VPC as your EC2 instance.
+
+5. **Health Checks**
+
+   * Leave **Protocol** as `HTTP` (or `HTTPS` if you use SSL)
+   * **Path** → `/` (or `/health` if you have a health route)
+   * Optional: adjust **Healthy/Unhealthy thresholds**, **Timeout**, etc.
+
+**Step 6: Skip Manual Target Registration**
+
+* On the **“Register targets”** page:
+  → **Do not select any EC2 instances manually.**
+* Instead, **scroll down** and click **“Create target group”** directly.
+
+> 💡 Why?
+> Because if your target group will be used by:
+>
+> * an **Auto Scaling Group (ASG)** — the instances will register automatically when they launch,
+> * or a **Load Balancer** that points to the ASG — it will handle target registration dynamically.
+
+7. **Done ✅**
+
+   * You’ll see your new target group listed.
+   * After creating or linking it to a **Load Balancer**, AWS will start checking the health of your targets.
+
 
 ---
 
 ## 📈 Diagram Overview
 
-```
-          +-------------------------+
-          |    Application Load    |
-          |       Balancer (ALB)   |
-          +-----------+------------+
-                      |
-         +------------+------------+
-         |                         |
-  +------v------+         +--------v-------+
-  | Target Group |         | Target Group  |
-  |  /api/*      |         |   /admin/*    |
-  +------+-------+         +--------+------+
-         |                          |
-+--------v---------+     +----------v--------+
-|  EC2 Instances   |     |   EC2 Instances   |
-|  (launched by    |     |   (launched by    |
-|  Auto Scaling)   |     |   another ASG)    |
-+------------------+     +-------------------+
-```
+![](../i/Screenshot%202025-10-17%20163355.png)
 
 ---
 
