@@ -8,8 +8,8 @@ import {
     EC2Client,
     DescribeInstancesCommand
 } from "@aws-sdk/client-ec2";
-import express from "express";
 
+import express from "express";
 const app = express();
 app.use(express.json());
 
@@ -42,6 +42,7 @@ const ALL_MACHINES: Machine[] = [];
 
 async function refreshInstances() {
     const { AutoScalingInstances } = await client.send(new DescribeAutoScalingInstancesCommand());
+    
     const instanceIds = AutoScalingInstances?.map(x => x.InstanceId).filter(Boolean) ?? [];
 
     if (instanceIds.length === 0) return;

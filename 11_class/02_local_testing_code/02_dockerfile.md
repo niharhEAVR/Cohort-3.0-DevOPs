@@ -20,7 +20,9 @@ RUN mkdir -p /tmp/heavrdevs
 CMD ["code-server", "--auth", "none", "--bind-addr", "0.0.0.0:8080", "--disable-telemetry", "/tmp/heavrdevs"]
 ```
 ```
-Q> Explain me this dockerfile and what is code-server, how does it works in fully details, and  for what reason we ar using dockerfile instead we can use the docker un command, so explain it in fully detailed way..
+Q> Explain me this dockerfile and what is code-server, how does it works in
+ fully details, and  for what reason we ar using dockerfile instead we can
+  use the docker un command, so explain it in fully detailed way..
 ```
 
 ## 🧠 1. **What is `code-server`?**
@@ -130,13 +132,45 @@ CMD ["code-server", "--auth", "none", "--bind-addr", "0.0.0.0:8080", "--disable-
 
 Let’s break the arguments:
 
-| Flag | Purpose |
-|------|---------|
-| `--auth none` | Disables login. No password/token. Not recommended for public usage. |
-| `--bind-addr 0.0.0.0:8080` | Makes the server accessible from outside the container on port 8080. |
-| `--disable-telemetry` | Disables sending usage data back to Microsoft. |
-| `/tmp/heavrdevs` | Opens this folder as your “workspace” in VS Code. |
+| Flag / Value               | Why it is used                                                                                                                                            |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--auth none`              | So that during **development/demo**, you don't have to enter a password every time. It makes access instant — just open browser and use.                  |
+| `--bind-addr 0.0.0.0:8080` | Because by default, code-server only listens inside the container — this flag makes it **accessible from your browser / outside machine** at port 8080.   |
+| `--disable-telemetry`      | To **avoid sending anonymous data to Microsoft**, which is not necessary during testing, and also improves **privacy** and **performance** slightly.      |
+| `/tmp/heavrdevs`           | We must **tell code-server which folder to open as the workspace** — so we give it `/tmp/heavrdevs`, meaning “this is where users will write their code.” |
 
+
+
+`--disable-telemetry` simply means **“stop sending analytics or usage data to Microsoft.”**
+
+### What does “telemetry” mean?
+
+Telemetry = automatic background tracking data — like:
+
+* which VS Code features you are using
+* crash/error reports
+* anonymous usage metrics
+
+By default, **code-server behaves like normal VS Code**, which means it can send **anonymous telemetry data** back to Microsoft for product improvement.
+
+### Why do we disable it?
+
+We add `--disable-telemetry` mainly for:
+
+* ✅ **Privacy** — no data leaves your server
+* ✅ **Performance** — slightly reduces background network usage
+* ✅ **Enterprises / security rules** — often disallow sending data outside
+* ✅ **Clean testing** — you don't need analytics during local development
+
+So in short:
+
+**It turns off analytics and usage tracking.
+It’s mainly for privacy and cleaner environment — nothing breaks if you disable it.** ✅
+
+
+
+---
+---
 ---
 
 ## 🚢 SECTION 3: Why use a Dockerfile instead of just `docker run`?

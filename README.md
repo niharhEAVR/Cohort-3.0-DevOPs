@@ -119,7 +119,7 @@ pm2 kill
 
 ---
 
-### Upto 10_class revision is done
+### Upto 10_class revision is done and 11_class only the backend section is pending (class video at 1:26:00)
 
 ---
 
@@ -127,4 +127,4 @@ pm2 kill
 
 1. `After the completetion of the Webdev` I have to came back on the 08_class for deeply understand the internal concept of ci/cd and github actions and docker-compose with dockerfile 
 
-2. This is load balancer root class and root scalling also so revise this `09_class` properly it will help to understand how load balancer & scaling works 
+2. This is load balancer's, root class and root scalling also so revise this `09_class` properly it will help to understand how load balancer & scaling works 

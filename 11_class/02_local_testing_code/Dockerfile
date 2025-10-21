@@ -17,5 +17,3 @@ RUN mkdir -p /tmp/heavrdevs
 
 # Start code-server on container launch
 CMD ["code-server", "--auth", "none", "--bind-addr", "0.0.0.0:8080", "--disable-telemetry", "/tmp/heavrdevs"]
-
-# read 03_dockerfile.md for understanding
