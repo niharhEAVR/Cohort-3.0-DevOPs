@@ -3,6 +3,14 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "scaleup": "bun index.ts",
+    "scaleDown": "bun index5.ts",
+    "debug":"bun index2.ts",
+    "dev" : "bun index3.ts",
+    "start":"bun index4.ts"
+
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

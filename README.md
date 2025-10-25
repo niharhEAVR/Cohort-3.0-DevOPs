@@ -43,6 +43,13 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo docker --version
 ```
 
+
+---
+
+## Needed dokcer commands
+
+[click](./05_class/01_notes/05_commands.md)
+
 ---
 
 ### How to deploy your website to production in 30 minutes
@@ -119,7 +126,7 @@ pm2 kill
 
 ---
 
-### Upto 10_class revision is done and 11_class only the backend section is pending (class video at 1:26:00)
+### Upto 11_class revision is done
 
 ---
 

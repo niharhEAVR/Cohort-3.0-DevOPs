@@ -27,7 +27,15 @@
 
 ---
 
-6. If the current setups works fine then go forward and create an image, then a launch template with a specification of base instance (including the security group for ssh and 8080) and in userdata section paste this:
+6. If the current setups works fine then go forward and create an image and in images section Whenever you see this:
+
+> ✅ **Reboot instance**
+
+**Never leave it checked if you're actively running a pipeline**
+Only leave it checked if you're okay with stopping your entire system temporarily for a **very clean snapshot**.
+
+
+- Then create a launch template with a specification of base instance (including the security group for ssh and 8080) and in userdata section paste this:
 
 ```sh
 #!/bin/bash
@@ -120,6 +128,5 @@ bun add @aws-sdk/client-auto-scaling
 
 - so what we are doing is that we are not gonna manually scale our instances for aws asg, we need a orchestrator for doing its own (by checking how many machines are up, how users are currently in the app, what machines are not in use, it will stop them or create new instances depending on the user)
 - 10_class we did it by aws > autoscaling groups > automatic scalling > Dynamic scaling policies
-- today we will be doing it by the index.ts file
+- today we will be doing it by the backend
 - on the 10th point you have copied two keys, now use them in your bun project
-- so todays orchestrator havent finished yet
