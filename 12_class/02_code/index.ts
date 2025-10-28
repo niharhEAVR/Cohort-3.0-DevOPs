@@ -7,11 +7,19 @@ app.get("/cpu",(req,res)=>{
         Math.random();        
     };
     const totalTime = Date.now() - startTime;
-    res.send("Hello cpu. "+" Total time taken for the operation is: "+totalTime+" ms");
+    res.json("Hello cpu. "+" Total time taken for the operation is: "+totalTime+" ms");
 });
 
 app.get("/health",(req,res)=>{
-    res.status(202).send("server is healthy");
+    res.status(202).json("server is healthy");
+});
+
+app.get("/",(req,res)=>{
+    res.status(202).json({
+        "greet":"Hello user",
+        "route-1":"http://localhost:3000/cpu",
+        "route-2":"http://localhost:3000/health"
+    });
 });
 
 app.listen(3000);

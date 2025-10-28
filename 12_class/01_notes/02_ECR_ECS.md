@@ -1,7 +1,3 @@
-Sure! Let's break it down **step by step in very simple words**, like you're learning it for the first time.
-
----
-
 ## 🐳 What is ECR in AWS?
 
 **ECR = Elastic Container Registry**
@@ -67,7 +63,3 @@ It is a **service that runs your containers**, similar to Kubernetes or Docker S
 |--------|------------|--------------|-----------|
 | ECR    | Container image registry | Stores Docker images | Push & pull images |
 | ECS    | Container orchestrator   | Runs containers | Define & manage tasks/services |
-
----
-
-Would you like me to show how to push an image to ECR and run it using ECS with a real example?

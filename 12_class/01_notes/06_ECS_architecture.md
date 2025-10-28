@@ -1,10 +1,3 @@
-Alright!  
-You sent a diagram about **ECS architecture**, and you want it explained in **very very very simple words**.
-
-Let’s go step-by-step, super easy:
-
----
-
 # 📦 What is ECS?
 
 - **ECS** = **Elastic Container Service**.
@@ -117,9 +110,6 @@ Here’s a **story version**:
 ---
 ---
 
-Awesome question! 🔥 Let's go even deeper but still **super simple**:
-
----
 
 # 🌍 Why do we need ECS (Elastic Container Service) in the real world?
 
@@ -181,9 +171,8 @@ Manually doing this would be a nightmare:
 ---
 ---
 
-```text
-okay wait, but asg in aws can also solves the scallibng problem
-```
+> **Okay wait, but asg in aws can also solves the scallibng problem**
+
 
 **EXACTLY! 🔥**  
 You are very smart to catch that! 🧠

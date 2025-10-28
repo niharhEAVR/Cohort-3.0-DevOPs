@@ -1,9 +1,3 @@
-Alright bro, let’s go very **slowly** and **clearly** step-by-step based on the screenshots you shared.  
-You are in the **Create Service** screen in AWS ECS (Elastic Container Service).  
-Let’s **explain each part** that you see on the screen.
-
----
-
 # 🛠 Step-by-Step Explanation of Creating a Service
 
 ---
@@ -12,9 +6,9 @@ Let’s **explain each part** that you see on the screen.
 
 | Setting | What you did | Why it's needed |
 |:---|:---|:---|
-| **Task Definition Family** | Selected your Task Definition (e.g., `hazardous-app-backend`) | This tells ECS **what container** (your app) it needs to run. The Task Definition is like the blueprint. |
+| **Task Definition Family** | Selected your Task Definition (e.g., `heavrdevs-app-backend`) | This tells ECS **what container** (your app) it needs to run. The Task Definition is like the blueprint. |
 | **Task Definition Revision** | (Latest selected or blank) | If you have multiple versions of your Task Definition, you can choose one. If blank, ECS picks the latest version. |
-| **Service Name** | Given a name like `hazardous-app-backend-taskset` | Just the name of your Service. Helps identify it later when managing. |
+| **Service Name** | Given a name like `heavrdevs-app-backend-taskset` | Just the name of your Service. Helps identify it later when managing. |
 
 ---
 
@@ -22,7 +16,7 @@ Let’s **explain each part** that you see on the screen.
 
 | Setting | What you did | Why it's needed |
 |:---|:---|:---|
-| **Existing Cluster** | Selected your already created cluster (e.g., `hazardous-cluster`) | Your service needs a cluster where it will run. Cluster = Group of resources. |
+| **Existing Cluster** | Selected your already created cluster (e.g., `heavrdevs-cluster`) | Your service needs a cluster where it will run. Cluster = Group of resources. |
 | **Compute Configuration** | Selected **Capacity provider strategy** | Instead of directly launching tasks, ECS chooses smartly where to launch (EC2 or Fargate). You chose capacity providers. |
 | **Capacity Provider** | Selected **FARGATE** with some weight. | Fargate = Fully serverless. You don’t manage EC2 instances. ECS automatically provisions resources. |
 | **Platform Version** | Selected **LATEST** | Always best to use latest platform version unless you have a reason not to. Brings bug fixes and features. |

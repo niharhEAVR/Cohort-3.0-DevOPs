@@ -1,7 +1,3 @@
-Perfect! Let me walk you through **everything from scratch** in a beginner-friendly and detailed way — starting right from the **AWS Console**, building your Docker image, pushing it to **ECR**, and preparing it to be used by **ECS** if needed later.
-
----
-
 # 🧭 Step-by-Step Guide: Push a Containerized App to AWS ECR
 
 ---
@@ -38,8 +34,10 @@ You'll enter:
 3. Click **“Get started”** or **“Create repository”**.
 4. Choose **Private repository**.
 5. Enter a name (e.g., `my-app`).
-6. Leave settings as default (or customize as needed).
-7. Click **Create repository**.
+6. Image Tag settings : Choose `Mutable` if there will be aupdation coming in future or `Immutable` for no update
+7. Encryption settings : AES-256
+8. Leave settings as default (or customize as needed).
+9. Click **Create repository**.
 
 Now your ECR repo is ready.
 
@@ -88,10 +86,33 @@ You now have a Docker image named `my-app`.
 - To push to ECR, you must authenticate Docker:
 
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account Id>.dkr.ecr.<region>.amazonaws.com
 ```
 
 Replace the **account ID and region** with your own.
+
+You will see this
+
+```sh
+Login Succeeded
+```
+
+
+---
+
+Before pushing the image, make sure the **ECR repository name** and the **local Docker image name** are the same.
+
+* **ECR repository name** → `my-app`
+* **Local Docker image name** → `my-app`
+
+```sh
+docker build -t my-app .
+# i mean to say this
+# if the name is wrong then rebuild that image with the repo name
+```
+
+✅ This ensures consistency and prevents push or tagging errors.
+
 
 ---
 
@@ -145,8 +166,6 @@ You can pull the image on any system that has Docker + AWS CLI:
 
 ```bash
 docker pull 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
+
+docker run -d -p 3000:3000  381492183358.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest
 ```
-
----
-
-Would you like to now **deploy this image using ECS (Fargate)**, or maybe set up a **CI/CD pipeline** to push images automatically from GitHub?

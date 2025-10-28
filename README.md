@@ -126,7 +126,7 @@ pm2 kill
 
 ---
 
-### Upto 11_class revision is done
+### Upto 12_class revision is done
 
 ---
 
@@ -134,4 +134,4 @@ pm2 kill
 
 1. `After the completetion of the Webdev` I have to came back on the 08_class for deeply understand the internal concept of ci/cd and github actions and docker-compose with dockerfile 
 
-2. This is load balancer's, root class and root scalling also so revise this `09_class` properly it will help to understand how load balancer & scaling works 
+2. `09_class` is load balancer's root class & root scalling, And also so revise this class properly, Cuase it will help to understand how load balancer & scaling works 
