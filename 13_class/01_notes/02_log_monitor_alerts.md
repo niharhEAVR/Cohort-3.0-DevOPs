@@ -1,7 +1,3 @@
-Of course! Let's go **very detailed but in simple words**:
-
----
-
 # 1. **Logging** (Recording what happens)
 
 **What it is**:  

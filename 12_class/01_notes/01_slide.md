@@ -8,6 +8,8 @@ https://petal-estimate-4e9.notion.site/AWS-ECR-and-ECS-1b07dfd1073580c8b390ec714
 
 1. Install AWS cli on pc : [AWS Command Line Interface Installer](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) This is a Official doc by AWS (Choose Windos for easy installation)
 
+2. Clone this Repo : [Nihar-Debnath/container_orchestration](https://github.com/Nihar-Debnath/container_orchestration.git) - And using docker build & run this backend app
+
 
 ### Class Conext of todays is:
 
@@ -47,7 +49,6 @@ https://petal-estimate-4e9.notion.site/AWS-ECR-and-ECS-1b07dfd1073580c8b390ec714
 
     ```sh
     # Pushing commands all in once
-    cd 12_class/02_code
 
     aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 381492183358.dkr.ecr.ap-south-1.amazonaws.com
 
@@ -70,7 +71,7 @@ https://petal-estimate-4e9.notion.site/AWS-ECR-and-ECS-1b07dfd1073580c8b390ec714
 
 ---
 
-6. Now read the `06_ECS_architcture.md` to get to know what are we gonna building
+6. Now read the `07_ECS_architcture.md` to get to know what are we gonna building
 
 7. Now we will create a **cluster**, to create a cluster check this [Creating a Cluster](https://petal-estimate-4e9.notion.site/Creating-a-Cluster-1b07dfd1073580218595ee866a6381af)
 
@@ -143,7 +144,7 @@ Your **Task Definition** is now created!
 
     - On your ECS page goto cluster > then go inside your created cluster
     - On the bar you will see `Services` and click on create
-    - `07_cluster_service.md` -> in here all the steps are written for creating a service
+    - `08_cluster_service.md` -> in here all the steps are written for creating a service
 
 
 10. Once your service is created and you sees that the 5/5 machines are running, 

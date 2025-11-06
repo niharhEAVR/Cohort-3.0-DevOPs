@@ -1,8 +1,3 @@
-Awesome question! 🔥  
-Let’s go very simply:
-
----
-
 # 🌟 What is **New Relic**?
 
 - **New Relic** is a **tool for monitoring, logging, alerting, and performance tracking** of apps, servers, databases, websites, APIs — everything!

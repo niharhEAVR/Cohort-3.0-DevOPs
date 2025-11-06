@@ -135,3 +135,6 @@ pm2 kill
 1. `After the completetion of the Webdev` I have to came back on the 08_class for deeply understand the internal concept of ci/cd and github actions and docker-compose with dockerfile 
 
 2. `09_class` is load balancer's root class & root scalling, And also so revise this class properly, Cuase it will help to understand how load balancer & scaling works 
+3. `12_class` revisit it again for more depth knowledge And add these Features
+    (1. Add a CI/CD pipeline that pushes every commit to ECR) (It is Done but the problem is inner concepts, i have to learn all the things again)
+    (2. Certificate Managment by AWS Certificate Manager)
