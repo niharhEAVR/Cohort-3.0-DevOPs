@@ -4,7 +4,35 @@
 
 ---
 
+### ✅ Progress
+
+Study completed up to **week 30 > 30.1 | AWS ERC, ECS and container orchestation** 
+
+---
+
+### 🧠 Skills Learned So Far From (DEVOPs)
+
+* *Package Managers:* bun ([Bun offical Doc](https://bun.com/docs), [more of bun](./08_class/01_notes/02_bun.md)), pm2 (for managing projects inside the vm)
+
+* *Side Effects:* VM (virtual machine), SSH (secure shell protocall), SSL (Secure Sockets Layer) certificate, Yaml or Yml
+
+<br>
+
+* **AWS (ASG)**
+* **NGINX**
+* **CI-CD Pipeline**
+* **Docker**
+* **Newrelic for Monitering**
+
+
+---
+
 ### Node.js installation process for ubuntu:
+
+🔗 **Docker Installation Guide**:  
+    [Install Nodejs on Ubuntu 24.04 - Digitalocean Docs](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04#option-3-installing-node-using-the-node-version-manager)
+
+- **Or follow these steps**
 
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -48,7 +76,7 @@ sudo docker --version
 
 ## Needed dokcer commands
 
-[click](./05_class/01_notes/05_commands.md)
+**[click](./05_class/01_notes/05_commands.md)**
 
 ---
 
@@ -124,17 +152,76 @@ pm2 kill
 # stop and remove all PM2 processes + daemon
 ```
 
----
-
-### Upto 12_class revision is done
 
 ---
 
-# Todos
+### 🧠 Skills Learned So Far From (Web Dev)
 
-1. `After the completetion of the Webdev` I have to came back on the 08_class for deeply understand the internal concept of ci/cd and github actions and docker-compose with dockerfile 
+* *Package Managers:* (npm), (pnpm)
 
-2. `09_class` is load balancer's root class & root scalling, And also so revise this class properly, Cuase it will help to understand how load balancer & scaling works 
-3. `12_class` revisit it again for more depth knowledge And add these Features
+* **Node.js**
+* **Express.js**
+* **MongoDB (Mongoose)**
+* **React.js** (vite, zustand)
+* **Tailwind Css** [Click Here to see the Tailwind css major change v4](https://www.youtube.com/watch?v=bupetqS1SMU)
+* **TypeScript**
+* **Websocket**
+* **Postgres Sql (NeonDB, ORM: Prisma)** [Click Here to setup the Prisma7](https://www.prisma.io/docs/orm)
+* **Next.js (CSR, SSR, SSG, ISR)** [How to install prisma in the Next app. Click Here](https://www.youtube.com/watch?v=Ndhx_rNkoUw&t).
+* **TurboRepo**
+
+
+---
+
+### Some important commands:
+
+```sh
+# Node
+npm init -y # For declaration of package.json
+
+
+# For saving DevDependencies
+# --save-dev 
+# -D
+
+# React
+npm create vite@latest 
+
+# Typescript
+npm install -g typescript ts-node
+tsc --init
+tsc -b
+npm install -g ts-node
+ts-node ./src/index.ts # Direct run the ts files, no need compilations.
+
+# Prisma
+npm install prisma
+npx prisma migrate dev --name <name> # Creating or changing the original table.
+npx prisma studio # To visually check the database
+npx prisma migrate reset # For new comers, they can initialize the table.
+npx prisma generate # PrismaClient generator.
+
+# Next
+npx create-next-app@latest
+
+# Turborepo
+npx create-turbo@latest
+
+# Alternate package manager
+pnpm # npm
+pnpm dlx # npx
+```
+
+
+---
+
+# Upto 12_class revision is done
+
+---
+
+# Todos or Revisit
+
+1. `Revisit:-` **09_class** is load balancer's root class & root scalling, And also so revise this class properly, Cuase it will help to understand how load balancer & scaling works 
+2. `Revisit:-` **12_class** revisit it again for more depth knowledge And add these Features
     (1. Add a CI/CD pipeline that pushes every commit to ECR) (It is Done but the problem is inner concepts, i have to learn all the things again)
     (2. Certificate Managment by AWS Certificate Manager)

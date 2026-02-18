@@ -16,7 +16,7 @@ Start by cloning the following repository:
 
 🔗 **GitHub Repo**:  
 ```bash
-https://github.com/Nihar-Debnath/docker-ci-cd.git
+https://github.com/niharhEAVR/docker-ci-cd
 ```
 
 #### 2. **Explore the Monorepo Structure**

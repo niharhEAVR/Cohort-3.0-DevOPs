@@ -8,5 +8,12 @@ https://petal-estimate-4e9.notion.site/Deploying-a-monorepo-to-VMs-19c7dfd107358
 ### And todays class github link:
 
 ```link
-https://github.com/Nihar-Debnath/docker-ci-cd
+https://github.com/niharhEAVR/docker-ci-cd
 ```
+
+- all the works happened inside this turborepo
+- so clone it and then do all the things manually again
+
+---
+
+# Bun offical Doc [Bun](https://bun.com/docs)

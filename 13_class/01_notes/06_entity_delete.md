@@ -1,3 +1,5 @@
+# If you are deleting the newrelic agents entity manually then follow these steps otherwise for docker read this file [click](./07_docker_entity_delete.md)
+
 ## 🧭 Step-by-Step: Using the GraphiQL API Explorer
 
 ### **Open the explorer**
