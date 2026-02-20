@@ -22,7 +22,8 @@ Study completed up to **week 30 > 30.1 | AWS ERC, ECS and container orchestation
 * **NGINX**
 * **CI-CD Pipeline**
 * **Docker**
-* **Newrelic for Monitering**
+* **Redis**
+* **Newrelic for Monitering (NRQL)**
 
 
 ---
@@ -76,7 +77,7 @@ sudo docker --version
 
 ## Needed dokcer commands
 
-**[click](./05_class/01_notes/05_commands.md)**
+**[*click*](./05_class/01_notes/05_commands.md)**
 
 ---
 
@@ -91,6 +92,11 @@ sudo docker --version
 
 ```sh
 ssh -i ~/.ssh/mykey.pem <OS-or-User-name>@<SERVER_IP>
+
+# or do this, if the direct is not working
+
+cd .ssh # go into ssh folder first for the kay
+ssh -i mykey.pem <OS-or-User-name>@<SERVER_IP>
 ```
 
 ---

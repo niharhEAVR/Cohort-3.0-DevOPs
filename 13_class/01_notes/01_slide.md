@@ -135,4 +135,87 @@ SELECT average(cpuPercent) AS `CPU used %` FROM SystemSample WHERE entityGuid = 
 
 ---
 
-# restart from 1:06:00
+12. Now setup the APM & Services
+
+- go to the section of apm and follow all the steps and write this code in the index.js file
+
+```js
+require("newrelic");
+
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+        console.log("route hit");
+        res.json({message: "hi there"})
+})
+
+app.listen(3000, () => {
+        console.log("listening on port 3000");
+});
+```
+
+- and then run the app using newrelic command something like this
+
+```sh
+NEW_RELIC_APP_NAME=testing NEW_RELIC_LICENSE_KEY=d3fd********* node -r newrelic index.js
+```
+
+- and now visit the http://ip:3000 several times
+
+- go back to the apm dashboard you will see the graphs
+
+- so all in all apm tracks why our application took so long to load to end user, it will help us identify where exactly the code is creating the problem 
+
+---
+
+13. Now we setup the logging
+
+- for that on the ec2 machine, install the winston for your app `npm i winston`
+- edit the code
+
+```js
+require("newrelic");
+const winston = require('winston');
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.simple(),
+  }));
+}
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+	logger.info("route hit");
+	if (Math.random() < 0.5) {
+		logger.error("there was an err");
+	}
+	res.json({message: "hi there"})
+});
+
+app.listen(3000, () => {
+	console.log("listening on port 3000");
+});
+```
+
+- run the newrelic command with a another flag added
+
+```sh
+NEW_RELIC_APPLICATION_LOGGING_FORWARDING_ENABLED=true NEW_RELIC_APP_NAME=testing NEW_RELIC_LICENSE_KEY=your_key node -r newrelic index.js
+```
+
+- now you will see the logs are happening, you will see there is 2 files have been created and stored the logs
+
+- and if you visits the newrelic log section you will see the logs automatically came to the newrelic also
