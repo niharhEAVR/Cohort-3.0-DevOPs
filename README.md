@@ -6,7 +6,7 @@
 
 ### ✅ Progress
 
-Study completed up to **week 30 > 30.1 | AWS ERC, ECS and container orchestation** 
+Study completed up to **week 31 > Week 31.1 | Monitoring, prometheus and grafana** 
 
 ---
 
@@ -24,6 +24,7 @@ Study completed up to **week 30 > 30.1 | AWS ERC, ECS and container orchestation
 * **Docker**
 * **Redis**
 * **Newrelic for Monitering (NRQL)**
+* **Prometheus for Monitering (metrics)**
 
 
 ---
