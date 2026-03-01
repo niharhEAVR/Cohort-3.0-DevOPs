@@ -177,3 +177,149 @@ Node.js = Separate kitchen tools
 Bun = All-in-one smart kitchen machine
 
 ---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
+
+
+
+
+# 🟢 1️⃣ Run TypeScript Backend (No Build Needed)
+
+If you just want to run your server:
+
+```bash
+bun src/index.ts
+```
+
+OR if you have scripts in `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "bun src/index.ts"
+  }
+}
+```
+
+Then run:
+
+```bash
+bun run dev
+```
+
+✅ Recommended for development
+✅ Fast
+✅ No build step required
+
+---
+
+# 🟢 2️⃣ Build Backend for Production (Node Target)
+
+If you want to build to JS and run with **Node**:
+
+```bash
+bun build src/index.ts --target=node --outfile=dist/index.js
+```
+
+Then run:
+
+```bash
+node dist/index.js
+```
+
+---
+
+# 🟢 3️⃣ Build Backend for Bun Runtime (Recommended if using Bun in prod)
+
+```bash
+bun build src/index.ts --target=bun --outfile=dist/index.js
+```
+
+Then run:
+
+```bash
+bun dist/index.js
+```
+
+---
+
+# 🟢 4️⃣ If Using Docker (Cleanest Way)
+
+Instead of building manually, just:
+
+```dockerfile
+CMD ["bun", "src/index.ts"]
+```
+
+No build required.
+
+---
+
+# 🟢 5️⃣ If Using PM2 with Bun
+
+```bash
+pm2 start src/index.ts --interpreter bun
+```
+
+OR if built:
+
+```bash
+pm2 start dist/index.js --interpreter bun
+```
+
+---
+
+# 🟢 6️⃣ If You Want Watch Mode
+
+```bash
+bun --watch src/index.ts
+```
+
+---
+
+# 🧠 When You Must Use `--target`
+
+Use `--target=node` or `--target=bun` **only when using `bun build`**.
+
+If you don’t specify, Bun assumes:
+
+```
+browser
+```
+
+That’s why you saw:
+
+> Browser build cannot require() Node.js builtin
+
+Because `cluster` and `v8` are Node-only modules.
+
+---
+
+# 🧩 Final Simple Rule
+
+For backend:
+
+👉 **Development** → `bun src/index.ts`
+👉 **Production (Bun runtime)** → `bun build ... --target=bun`
+👉 **Production (Node runtime)** → `bun build ... --target=node`
+
+---
+
+Since you're doing DevOps, EC2, Docker, Prometheus etc —
+I honestly recommend:
+
+> 🚀 Skip build. Just run Bun directly unless you have a specific reason.

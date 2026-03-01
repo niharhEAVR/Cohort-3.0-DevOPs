@@ -1,7 +1,3 @@
-Here’s a **detailed explanation** of these common Docker commands:  
-
----
-
 ## **1️⃣ `docker images`**
 📌 **Purpose:** Lists all Docker images stored locally on your machine.  
 📌 **Usage:**  
@@ -170,8 +166,6 @@ docker exec my-mongo mongo --eval "db.stats()"
 ---
 
 
-To remove Docker images, you can use the following commands:
-
 ### 1️⃣ **List all Docker images**  
 Before deleting, check the available images:
 ```bash
@@ -223,11 +217,6 @@ docker rmi -f <image_id>
 ---
 ---
 
-
-
-Let's go step by step and test **`docker push`** and **`docker exec`**.
-
----
 
 ## **1️⃣ Testing `docker push`**
 📌 **Purpose:** Upload a Docker image to a registry (like Docker Hub).  
@@ -391,16 +380,8 @@ This will list the root directory (`/`) of the container **without opening a she
 | `exit` | Leave the container shell |
 
 ---
-
-### **Want to Try Pushing Your Own Image?**  
-If you already have an image, try pushing it to Docker Hub. Otherwise, we can **build a simple image** first. 🚀 Let me know what you want to do next!
-
-
 ---
 ---
----
-
-Yes, exactly! 🚀  
 
 ### **1️⃣ `docker push` (Sharing Images)**
 When you push an image to **Docker Hub**, anyone can **pull** and use it **if it's public**.  
@@ -423,4 +404,352 @@ Yes! **`docker exec` lets you enter a running container**, just like logging int
   ```
   This opens a **terminal inside the container**—just like SSH-ing into a server or opening a VM.
 
-Would you like to test pushing an image and pulling it from another system? 😊
+---
+---
+---
+---
+---
+---
+---
+---
+
+
+
+
+
+# 🗑 Remove a Specific Docker Network
+
+```bash
+docker network rm <network-name>
+```
+
+Example:
+
+```bash
+docker network rm monitoring
+```
+
+---
+
+# ⚠ If You Get Error (Network in Use)
+
+It means containers are still connected.
+
+First stop & remove containers:
+
+```bash
+docker ps
+docker stop <container_name>
+docker rm <container_name>
+```
+
+Then remove network:
+
+```bash
+docker network rm monitoring
+```
+
+---
+
+# 🧹 Remove ALL Unused Networks
+
+```bash
+docker network prune
+```
+
+It will ask confirmation.
+
+---
+
+# 🔍 See Existing Networks
+
+```bash
+docker network ls
+```
+
+
+---
+---
+---
+---
+---
+
+
+
+
+## 🔹 1️⃣ `docker-compose up`
+
+This command:
+
+* Creates containers (if not created)
+* Starts containers
+* Uses **existing images**
+* Does **NOT rebuild** images
+
+👉 If you already built your image earlier, it will just reuse that image.
+
+### Example situation:
+
+You have:
+
+```yaml
+services:
+  app:
+    build: .
+```
+
+You run:
+
+```bash
+docker-compose up
+```
+
+If the image was already built before, Docker will **not rebuild** it — even if you changed your source code (unless you're using volumes for live reload).
+
+---
+
+## 🔹 2️⃣ `docker-compose up --build`
+
+This command:
+
+* **Forces a rebuild of images**
+* Then starts containers
+* Recreates containers if needed
+
+👉 Even if nothing changed, it will rebuild the image again.
+
+---
+
+## 🔥 Real-world Example (Very Important for You)
+
+Suppose:
+
+* You modified your `Dockerfile`
+* OR you installed a new npm package
+* OR you changed backend code
+* OR you changed environment variables inside Docker build
+
+If you run:
+
+```bash
+docker-compose up
+```
+
+❌ It might still use the old image
+So your changes won’t reflect.
+
+But if you run:
+
+```bash
+docker-compose up --build
+```
+
+✅ It rebuilds the image
+✅ Includes new dependencies
+✅ Then starts the container
+
+---
+
+## 🧠 When Should You Use What?
+
+| Situation                       | Command                     |
+| ------------------------------- | --------------------------- |
+| First time running project      | `docker-compose up --build` |
+| After changing Dockerfile       | `docker-compose up --build` |
+| After installing new dependency | `docker-compose up --build` |
+| Just restarting containers      | `docker-compose up`         |
+| No code change                  | `docker-compose up`         |
+
+---
+
+## 💡 Pro Tip (Dev Workflow)
+
+During development, if you mount code like this:
+
+```yaml
+volumes:
+  - .:/app
+```
+
+Then you usually don’t need `--build` for code changes — only for dependency or Dockerfile changes.
+
+---
+
+## 🚀 Bonus: Faster Clean Rebuild
+
+If things get weird (you know that Docker weirdness 😅):
+
+```bash
+docker-compose down
+docker-compose up --build
+```
+
+If still weird:
+
+```bash
+docker-compose down --volumes --remove-orphans
+docker-compose up --build
+```
+
+
+
+---
+---
+---
+---
+---
+---
+---
+
+
+
+# 🔹 `docker-compose down`
+
+This command:
+
+👉 **Stops and removes everything created by `docker-compose up`**
+
+That includes:
+
+* ✅ Containers
+* ✅ Networks (created by compose)
+* ❌ NOT images (by default)
+* ❌ NOT volumes (by default)
+
+---
+
+## 🧠 What Exactly Happens?
+
+When you run:
+
+```bash
+docker-compose down
+```
+
+Docker will:
+
+1. Stop all running containers
+2. Remove those containers
+3. Remove the default network created for the project
+
+So it basically cleans up the running environment.
+
+---
+
+## 🔥 Difference Between `stop` and `down`
+
+### 🔹 `docker-compose stop`
+
+* Stops containers
+* Containers still exist
+* You can restart them with `docker-compose start`
+
+### 🔹 `docker-compose down`
+
+* Stops containers
+* Deletes containers
+* Deletes network
+
+Think like this:
+
+* `stop` = Pause
+* `down` = Destroy (but not images)
+
+---
+
+## 🔥 What About Volumes?
+
+By default:
+
+```bash
+docker-compose down
+```
+
+❌ Does NOT remove volumes
+So your database data remains safe.
+
+If you want to remove volumes too:
+
+```bash
+docker-compose down --volumes
+```
+
+⚠️ This will delete:
+
+* DB data
+* Redis data
+* Any named volumes
+
+Use carefully.
+
+---
+
+## 🔥 What About Images?
+
+If you also want to remove images:
+
+```bash
+docker-compose down --rmi all
+```
+
+Now it will:
+
+* Remove containers
+* Remove networks
+* Remove images
+
+---
+
+# 💻 Real Example (Your Node + Prometheus Setup)
+
+You run:
+
+```bash
+docker-compose up --build
+```
+
+Now:
+
+* Node app running
+* Prometheus running
+* Network created
+
+Later you want a clean reset:
+
+```bash
+docker-compose down
+```
+
+Now:
+
+* Both containers gone
+* Network gone
+* Images still exist
+* Next `up` will start fresh containers from image
+
+---
+
+# 🧠 When Should You Use `down`?
+
+✔ When something is behaving weird
+✔ When you want a clean restart
+✔ Before switching branches
+✔ When port conflicts happen
+✔ When testing fresh container behavior
+
+---
+
+# 🚀 Best Dev Reset Pattern
+
+If things feel broken:
+
+```bash
+docker-compose down
+docker-compose up --build
+```
+
+If database corruption or stale volume issue:
+
+```bash
+docker-compose down --volumes
+docker-compose up --build

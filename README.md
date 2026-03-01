@@ -6,7 +6,7 @@
 
 ### ✅ Progress
 
-Study completed up to **week 31 > Week 31.1 | Monitoring, prometheus and grafana** 
+Study completed up to **Week 32.1 | Prometheus and Grafana Part-2** 
 
 ---
 
@@ -24,7 +24,7 @@ Study completed up to **week 31 > Week 31.1 | Monitoring, prometheus and grafana
 * **Docker**
 * **Redis**
 * **Newrelic for Monitering (NRQL)**
-* **Prometheus for Monitering (metrics)**
+* **Prometheus & Grafana for Monitering (metrics, gauge, histogram, PromQL, p95, p99)**
 
 
 ---
