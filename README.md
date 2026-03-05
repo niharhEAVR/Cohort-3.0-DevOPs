@@ -6,7 +6,7 @@
 
 ### ✅ Progress
 
-Study completed up to **Week 32.1 | Prometheus and Grafana Part-2** 
+Study completed up to **Week 33 | Serverless** 
 
 ---
 
@@ -25,6 +25,8 @@ Study completed up to **Week 32.1 | Prometheus and Grafana Part-2**
 * **Redis**
 * **Newrelic for Monitering (NRQL)**
 * **Prometheus & Grafana for Monitering (metrics, gauge, histogram, PromQL, p95, p99)**
+* **Serverless machines [cloudflare=(workers, isolates, wrangler cli, Hono)]** (There is a major problem with prisma accelerate setup with hono)
+
 
 
 ---
@@ -76,7 +78,7 @@ sudo docker --version
 
 ---
 
-## Needed dokcer commands
+## Needed docker commands
 
 **[*click*](./05_class/01_notes/05_commands.md)**
 
@@ -164,6 +166,7 @@ pm2 kill
 
 ### 🧠 Skills Learned So Far From (Web Dev)
 
+
 * *Package Managers:* (npm), (pnpm)
 
 * **Node.js**
@@ -173,18 +176,18 @@ pm2 kill
 * **Tailwind Css** [Click Here to see the Tailwind css major change v4](https://www.youtube.com/watch?v=bupetqS1SMU)
 * **TypeScript**
 * **Websocket**
-* **Postgres Sql (NeonDB, ORM: Prisma)** [Click Here to setup the Prisma7](https://www.prisma.io/docs/orm)
+* **Postgres Sql (NeonDB, ORM: Prisma)** [Click Here to setup the Prisma7](https://www.prisma.io/docs/prisma-postgres/quickstart/prisma-orm)
 * **Next.js (CSR, SSR, SSG, ISR)** [How to install prisma in the Next app. Click Here](https://www.youtube.com/watch?v=Ndhx_rNkoUw&t).
 * **TurboRepo**
 
 
 ---
 
-### Some important commands:
+### Some important commands (from web dev):
 
 ```sh
 # Node
-npm init -y # For declaration of package.json
+npm init -y # For declaration of package.json.
 
 
 # For saving DevDependencies
@@ -192,7 +195,7 @@ npm init -y # For declaration of package.json
 # -D
 
 # React
-npm create vite@latest 
+npm create vite@latest # This command is for react app using vite build tool.
 
 # Typescript
 npm install -g typescript ts-node
@@ -201,12 +204,15 @@ tsc -b
 npm install -g ts-node
 ts-node ./src/index.ts # Direct run the ts files, no need compilations.
 
-# Prisma
-npm install prisma
+# Prisma v7 setup (follow their official docs)
+npm install prisma @types/node --save-dev
+npm install @prisma/client @prisma/adapter-pg dotenv
+# Update package.json to enable ESM: {"type": "module"}
+npx prisma init # and dont do that (--db --output ../src/generated/prisma) otherwire it will ask for authentication to use prisma postgres, we are not using prisma prostgres, we are suing neondb
 npx prisma migrate dev --name <name> # Creating or changing the original table.
-npx prisma studio # To visually check the database
-npx prisma migrate reset # For new comers, they can initialize the table.
 npx prisma generate # PrismaClient generator.
+npx prisma studio # To visually check the database
+npx prisma migrate reset # For new comers, they can initialize the pre-existing tables.
 
 # Next
 npx create-next-app@latest
